@@ -13,7 +13,12 @@
     tools:context="com.example.sumanasaha.chatapplication.MainActivity"
     tools:showIn="@layout/app_bar_main"
     >
+<android.support.v7.widget.RecyclerView
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:id="@+id/drawerlist">
 
+</android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,12 +53,6 @@
             android:onClick="sendMessage" />
 
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/bottomsection"
-        android:layout_alignParentLeft="true"
-        android:text="Hi Abhi! What would you like to do today?"
-        android:id="@+id/firsttext"
-        />
+
+
 </RelativeLayout>

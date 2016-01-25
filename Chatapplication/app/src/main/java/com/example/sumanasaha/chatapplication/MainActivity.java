@@ -1,9 +1,12 @@
 package com.example.sumanasaha.chatapplication;
 
+import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,12 +24,24 @@ import android.widget.RelativeLayout;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.app.PendingIntent.getActivity;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    int prevTextViewId = 0;
+    private RecyclerView recyclerView;
+    private VivzAdapter adapter;
+   /** int prevTextViewId = 0;
     int curTextViewId = prevTextViewId + 1;
-    int cur=curTextViewId+1;
+    int cur=curTextViewId+1;*/
+    TextView fv;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +68,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        TextView fv= (TextView) findViewById(R.id.firsttext);
-        fv.setId(curTextViewId);
+        //fv= (TextView) findViewById(R.id.firsttext);
+       //fv.setId(curTextViewId);
 
 
     }
@@ -115,8 +130,29 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    public static List<Information> getdata()
+    {
+        List<Information> data=new ArrayList<>();
+        int[] icons={R.drawable.profilepic};
+        String[] titles={"Hi Developer"};
+        for(int i=0;i<titles.length && i<icons.length;i++)
+        {
+            Information current=new Information();
+            current.iconId=icons[i];
+            current.title=titles[i];
+            data.add(current);
+        }
+        return data;
+    }
     public void sendMessage(View view)
     {
+        recyclerView= (RecyclerView) findViewById(R.id.drawerlist);
+        adapter=new VivzAdapter(this.getdata());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+/**
         //Fetching the value of EditText
         EditText msgrcvd= (EditText) findViewById(R.id.msgText);
         String msg=msgrcvd.getText().toString();
@@ -125,32 +161,48 @@ public class MainActivity extends AppCompatActivity
         RelativeLayout rl= (RelativeLayout) findViewById(R.id.mainlayout);
 
         //Setting the parameters for TextView
-        LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT
+       LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT
                 , LayoutParams.WRAP_CONTENT);
+
         TextView tv = new TextView(this);
         tv.setLayoutParams(params);
-        tv.setText(msg);
+        tv.setText(fv.getText().toString());
         tv.setVisibility(View.VISIBLE);
+
 
         //Setting Parameters for Relative layout
        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-
-
-        //TextView fv= (TextView) findViewById(R.id.firsttext);
-        //int curTextViewId = prevTextViewId + 1;
-        //int cur=curTextViewId+1;
-        //fv.setId(curTextViewId);
-        tv.setId(cur);
+                    //TextView fv= (TextView) findViewById(R.id.firsttext);
+                    //int curTextViewId = prevTextViewId + 1;
+                    //int cur=curTextViewId+1;
+                    //fv.setId(curTextViewId);
+       // tv.setId(cur);
         tv.setTextColor(Color.RED);
-
-        param.addRule(RelativeLayout.BELOW, curTextViewId);
-
-
+        // param.addRule(RelativeLayout.ABOVE, curTextViewId);
         rl.addView(tv, param);
-        curTextViewId=cur;
-        cur=curTextViewId+1;
+        fv.setText(msg);
+
+
+
+        /**tv.setId(curTextViewId);
+        TextView tv1 = new TextView(this);
+        tv1.setLayoutParams(params);
+        tv1.setText(msg);
+        tv1.setVisibility(View.VISIBLE);
+        RelativeLayout.LayoutParams param1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        param.addRule(RelativeLayout.BELOW, curTextViewId);
+        rl.addView(tv1, param);*/
+
+
+
+
+        //tv.setId(curTextViewId);
+       // curTextViewId=cur;
+        //cur=curTextViewId+1;*/
+
     }
     public void removeContent(View view)
     {
