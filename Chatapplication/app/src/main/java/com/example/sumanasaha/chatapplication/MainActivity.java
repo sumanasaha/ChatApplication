@@ -24,6 +24,9 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     int prevTextViewId = 0;
+    int curTextViewId = prevTextViewId + 1;
+    int cur=curTextViewId+1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        TextView fv= (TextView) findViewById(R.id.firsttext);
+        fv.setId(curTextViewId);
 
 
     }
@@ -134,10 +138,10 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        TextView fv= (TextView) findViewById(R.id.firsttext);
-        int curTextViewId = prevTextViewId + 1;
-        int cur=curTextViewId+1;
-        fv.setId(curTextViewId);
+        //TextView fv= (TextView) findViewById(R.id.firsttext);
+        //int curTextViewId = prevTextViewId + 1;
+        //int cur=curTextViewId+1;
+        //fv.setId(curTextViewId);
         tv.setId(cur);
         tv.setTextColor(Color.RED);
 
@@ -146,6 +150,7 @@ public class MainActivity extends AppCompatActivity
 
         rl.addView(tv, param);
         curTextViewId=cur;
+        cur=curTextViewId+1;
     }
     public void removeContent(View view)
     {
