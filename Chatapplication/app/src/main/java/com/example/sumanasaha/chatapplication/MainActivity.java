@@ -1,8 +1,10 @@
 package com.example.sumanasaha.chatapplication;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,12 +14,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    int prevTextViewId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +31,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         /**FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +50,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
     }
 
     @Override
@@ -103,22 +113,39 @@ public class MainActivity extends AppCompatActivity
     }
     public void sendMessage(View view)
     {
-        RelativeLayout layout=new RelativeLayout(this);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        layout.setLayoutParams(layoutParams);
-
-        RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //Fetching the message
+        //Fetching the value of EditText
         EditText msgrcvd= (EditText) findViewById(R.id.msgText);
         String msg=msgrcvd.getText().toString();
-        //Creating new text View
-        TextView newText=new TextView(this);
-        newText.setText(msg);
 
-        params1.addRule(msgrcvd.getId());
-        layout.addView(msgrcvd,params1);
-        //Restting the EditText text
-        msgrcvd.setText("Type Your Message here");
+        //Fetching the id of Main Layout
+        RelativeLayout rl= (RelativeLayout) findViewById(R.id.mainlayout);
+
+        //Setting the parameters for TextView
+        LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT
+                , LayoutParams.WRAP_CONTENT);
+        TextView tv = new TextView(this);
+        tv.setLayoutParams(params);
+        tv.setText(msg);
+        tv.setVisibility(View.VISIBLE);
+
+        //Setting Parameters for Relative layout
+       RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+
+
+        TextView fv= (TextView) findViewById(R.id.firsttext);
+        int curTextViewId = prevTextViewId + 1;
+        int cur=curTextViewId+1;
+        fv.setId(curTextViewId);
+        tv.setId(cur);
+        tv.setTextColor(Color.RED);
+
+        param.addRule(RelativeLayout.BELOW, curTextViewId);
+
+
+        rl.addView(tv, param);
+        curTextViewId=cur;
     }
     public void removeContent(View view)
     {

@@ -8,9 +8,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/mainlayout"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sumanasaha.chatapplication.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    >
 
 
     <LinearLayout
@@ -52,5 +54,6 @@
         android:layout_above="@id/bottomsection"
         android:layout_alignParentLeft="true"
         android:text="Hi Abhi! What would you like to do today?"
+        android:id="@+id/firsttext"
         />
 </RelativeLayout>
