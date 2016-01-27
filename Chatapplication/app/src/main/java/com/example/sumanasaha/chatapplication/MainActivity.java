@@ -2,6 +2,7 @@ package com.example.sumanasaha.chatapplication;
 
 import android.app.Fragment;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,6 +26,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static android.app.PendingIntent.getActivity;
@@ -33,14 +35,25 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private RecyclerView recyclerView;
     private VivzAdapter adapter;
-   /** int prevTextViewId = 0;
-    int curTextViewId = prevTextViewId + 1;
-    int cur=curTextViewId+1;*/
-    TextView fv;
+    private RecyclerView.LayoutManager mLayoutManager;
+    ArrayList<String> data=new ArrayList<>();
+
+
+
+
 
     @Override
     protected void onStart() {
         super.onStart();
+
+    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        recyclerView.scrollToPosition(data.size()-1);
+        adapter.notifyItemInserted(data.size()-1);
+
     }
 
     @Override
@@ -70,7 +83,21 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //fv= (TextView) findViewById(R.id.firsttext);
        //fv.setId(curTextViewId);
+        setUpRecyclerView();
+        data.add("Hi, How can I help you today");
+        recyclerView.scrollToPosition(data.size()-1);
+        adapter.notifyItemInserted(data.size() - 1);
 
+
+    }
+    private void setUpRecyclerView()
+    {
+        recyclerView= (RecyclerView) findViewById(R.id.drawerlist);
+        recyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+        adapter=new VivzAdapter(this,data);
+        recyclerView.setAdapter(adapter);
 
     }
 
@@ -130,32 +157,25 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public static List<Information> getdata()
-    {
-        List<Information> data=new ArrayList<>();
-        int[] icons={R.drawable.profilepic};
-        String[] titles={"Hi Developer"};
-        for(int i=0;i<titles.length && i<icons.length;i++)
-        {
-            Information current=new Information();
-            current.iconId=icons[i];
-            current.title=titles[i];
-            data.add(current);
-        }
-        return data;
-    }
+
     public void sendMessage(View view)
     {
-        recyclerView= (RecyclerView) findViewById(R.id.drawerlist);
-        adapter=new VivzAdapter(this.getdata());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        EditText txt= (EditText) findViewById(R.id.msgText);
+        String msg=txt.getText().toString();
+        String[] msgs={msg};
+
+            data.add(msg);
+            recyclerView.scrollToPosition(data.size()-1);
+            adapter.notifyItemInserted(data.size()-1);
+
+
+
 
 
 /**
-        //Fetching the value of EditText
-        EditText msgrcvd= (EditText) findViewById(R.id.msgText);
-        String msg=msgrcvd.getText().toString();
+
 
         //Fetching the id of Main Layout
         RelativeLayout rl= (RelativeLayout) findViewById(R.id.mainlayout);

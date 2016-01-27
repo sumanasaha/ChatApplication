@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -17,14 +18,14 @@ import java.util.List;
  */
 public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder>{
     private LayoutInflater inflater;
-    List<Information> data= Collections.emptyList();
-    public VivzAdapter(Context context,List<Information> data)
+    ArrayList<String> data= new ArrayList<>();
+    public VivzAdapter(Context context,ArrayList<String> data)
     {
         inflater = LayoutInflater.from(context);
         this.data=data;
     }
 
-    public VivzAdapter(List<Information> data) {
+    public VivzAdapter() {
     }
 
     @Override
@@ -36,9 +37,11 @@ public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Information current=data.get(position);
-        holder.title.setText(current.title);
-        holder.icon.setImageResource(current.iconId);
+
+        if(data.size()!=0) {
+            holder.title.setText(data.get(position));
+          //  holder.icon.setImageResource(current.iconId);
+        }
 
     }
 
@@ -49,12 +52,12 @@ public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder>{
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView title;
-        ImageView icon;
+       // ImageView icon;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             title= (TextView) itemView.findViewById(R.id.listText);
-            icon= (ImageView) itemView.findViewById(R.id.listIcon);
+       //     icon= (ImageView) itemView.findViewById(R.id.listIcon);
         }
     }
 }
