@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,6 +31,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static android.app.PendingIntent.getActivity;
+import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -84,9 +86,8 @@ public class MainActivity extends AppCompatActivity
         //fv= (TextView) findViewById(R.id.firsttext);
        //fv.setId(curTextViewId);
         setUpRecyclerView();
-        data.add("Hi, How can I help you today");
-        recyclerView.scrollToPosition(data.size()-1);
-        adapter.notifyItemInserted(data.size() - 1);
+        firsttext();
+
 
 
     }
@@ -94,11 +95,18 @@ public class MainActivity extends AppCompatActivity
     {
         recyclerView= (RecyclerView) findViewById(R.id.drawerlist);
         recyclerView.setHasFixedSize(true);
+       // mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         adapter=new VivzAdapter(this,data);
         recyclerView.setAdapter(adapter);
 
+    }
+    private void firsttext()
+    {
+        data.add("Hi, How can I help you today");
+        recyclerView.scrollToPosition(data.size()-1);
+        adapter.notifyItemInserted(data.size() - 1);
     }
 
     @Override

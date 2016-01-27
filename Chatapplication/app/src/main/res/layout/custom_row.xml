@@ -17,7 +17,11 @@
         android:layout_weight="0.7"
         android:background="@drawable/shape"
         android:layout_marginBottom="10dp"
-        android:padding="22dp" />
+        android:padding="22dp"
+        android:textColor="#ff7f50"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        />
 
 
 
