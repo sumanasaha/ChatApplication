@@ -1,6 +1,7 @@
 package com.example.sumanasaha.chatapplication;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity
     private VivzAdapter adapter;
     private RecyclerView.LayoutManager mLayoutManager;
     ArrayList<String> data=new ArrayList<>();
+    Context mCntx;
+    int height=0;
 
 
 
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity
     {
         super.onResume();
         recyclerView.scrollToPosition(data.size()-1);
-        adapter.notifyItemInserted(data.size()-1);
+        adapter.notifyItemInserted(data.size() - 1);
 
     }
 
@@ -98,13 +102,14 @@ public class MainActivity extends AppCompatActivity
        // mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
-        adapter=new VivzAdapter(this,data);
+        height=containerHeight();
+        adapter=new VivzAdapter(this,data,height);
         recyclerView.setAdapter(adapter);
 
     }
     private void firsttext()
     {
-        data.add("Hi, How can I help you today");
+        data.add("Hi, How can I help you today....You just need to type your query to get the desired results and one click. Just Go ahead");
         recyclerView.scrollToPosition(data.size()-1);
         adapter.notifyItemInserted(data.size() - 1);
     }
@@ -166,17 +171,28 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    public int containerHeight() {
+        WindowManager windowManager= (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        int h = windowManager.getDefaultDisplay().getHeight();
+        return h;
+
+    }
     public void sendMessage(View view)
     {
+
 
 
         EditText txt= (EditText) findViewById(R.id.msgText);
         String msg=txt.getText().toString();
         String[] msgs={msg};
+        txt.setText("");
 
-            data.add(msg);
-            recyclerView.scrollToPosition(data.size()-1);
+    //  Log.v("MainActivity", "Screen height" + height);
+        data.add(msg);
+            recyclerView.scrollToPosition(data.size() - 1);
             adapter.notifyItemInserted(data.size()-1);
+
+
 
 
 
