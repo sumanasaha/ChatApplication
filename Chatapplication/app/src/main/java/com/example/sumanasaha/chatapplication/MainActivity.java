@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity
     }
     private void firsttext()
     {
-        data.add("Hi, How can I help you today....You just need to type your query to get the desired results and one click. Just Go ahead");
+        data.add("Welcome!! How can we help you today");
         recyclerView.scrollToPosition(data.size()-1);
         adapter.notifyItemInserted(data.size() - 1);
     }

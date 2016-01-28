@@ -55,7 +55,7 @@ public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder>{
 
             TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT); // (width, height)
 
-            params.topMargin= (int) (height*0.6);
+            params.topMargin= (int) (height*0.7);
             holder.container.setLayoutParams(params);
         }
 
