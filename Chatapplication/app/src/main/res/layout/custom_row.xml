@@ -1,34 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/containerlayout">
+    android:layout_height="wrap_content"
+    android:id="@+id/containerlayout"
+    android:orientation="vertical">
 
-
-
-
-
-    <TextView
-        android:id="@+id/listText"
-        android:text="Hi Developer"
-        android:padding="22dp"
-        android:textColor="#ff7f50"
-        android:textStyle="bold"
-        android:textSize="16dp"
-        android:fontFamily="sans-serif"
-       android:layout_height="wrap_content"
-
-
-
-
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/innerlayout">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/usericon"
+            android:paddingBottom="22dp"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="name"
+                    android:id="@+id/name"
+                    android:layout_marginRight="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="date"
+                    android:id="@+id/date" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/listText"
+                android:text="Hi Developer!!!! How are you!! Are you available today for discussion?"
+                android:paddingBottom="22dp"
+                android:textColor="@color/darkGrey"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:fontFamily="sans-serif"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@drawable/shape"
+                android:layout_marginBottom="10dp"
+                android:gravity="left" />
+        </LinearLayout>
 
+    </LinearLayout>
 
-        android:background="@drawable/shape"
-        android:layout_marginBottom="10dp"
-
-
-        android:gravity="right" />
 
 </LinearLayout>
